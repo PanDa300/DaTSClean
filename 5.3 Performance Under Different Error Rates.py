@@ -47,7 +47,7 @@ def evaluate_sequential_forecast(df_cleaned, df_original, target_col, test_ratio
             (~np.isnan(y_test_true)) &
             (~np.isinf(y_test_true)) &
             (~np.isnan(y_pred)) &
-            (~np.isinf(y_pred))
+            (~np.isinf(y_pred)) 
     )
 
     y_test_true_valid = y_test_true[valid_mask]

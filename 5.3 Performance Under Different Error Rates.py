@@ -12,7 +12,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import (
     mean_squared_error,
     mean_absolute_error,
-    mean_squared_log_error
+    mean_squared_log_erro
 )
 
 warnings.filterwarnings('ignore')

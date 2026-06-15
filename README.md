@@ -1,9 +1,7 @@
-# Experimental Setup Guide (README)
 
-## 1. Hardware Environment
-The evaluation experiments were systematically executed on a dedicated Windows 11 workstation outfitted with an Intel/AMD CPU (specified as XXX CPU in the manuscript) and 16GB of system RAM to ensure a standardized and stable computational environment.
+The core algorithmic pipeline of this research is fully implemented and open-sourced. The overall data cleaning and resource allocation optimization workflows can be directly executed via the DaTSClean framework.Specifically, the experimental evaluations described in Sections 5.2 through 5.5 correspond to the following codebase modules:Section 5.2 (Predictive Model Performance Evaluation): Can be reproduced via the cross-dataset benchmark scripts in DaTSClean.Section 5.3 & 5.4 (Error Robustness & Diminishing Marginal Returns Analysis): Executed by tuning the error injection and cleaning ratio $\alpha$ configurations within the framework.Section 5.5 (Ablation Studies for Up-Hull and OptAllocation): Verified via the acceleration module toggles provided in the core engine.For complete instructions on environment setup and one-click replication of these results, please refer to the execution guides within the DaTSClean repository.
 
-## 2. Datasets Overview
+## 1. Datasets Overview
 To comprehensively evaluate the performance and generalization capabilities of the proposed DownsClean framework under a variety of data characteristics, the experimental suite incorporates 10 widely utilized, real-world multivariate time series datasets spanning multiple industrial and economic domains.
 
 | Dataset | Rows | Columns | Description |
@@ -18,7 +16,7 @@ To comprehensively evaluate the performance and generalization capabilities of t
 | **Rice** | 3,808 | 6 | Morphological and structural characteristic records of rice populations for classification and trend modeling. |
 | **Abalone** | 4,177 | 8 | Physical measurement profiles (length, diameter, weight, etc.) used to model and predict the age configurations of abalone. |
 
-## 3. Evaluation Metrics
+## 2. Evaluation Metrics
 In order to eliminate any evaluation bias resulting from a single mathematical formulation, the framework is rigorously benchmarked across five complementary metrics covering squared errors, absolute variations, and percentage scaling limits:
 
 * **Mean Squared Error (MSE)**: Quantifies the average squared discrepancy between predicted and true values. It assigns a higher penalty to large deviations. A perfect model yields an MSE of 0.
@@ -36,7 +34,7 @@ In order to eliminate any evaluation bias resulting from a single mathematical f
 * **Mean Absolute Percentage Error (MAPE)**: Measures the percentage relative deviation. A value of 0% indicates an absolute flawless fit, whereas values exceeding 100% flag highly degenerate predictions.
   $$MAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{|y_i - \hat{y}_i|}{\max(y_i, \hat{y}_i)}$$
 
-## 4. Baseline Data Cleaning Algorithms
+## 3. Baseline Data Cleaning Algorithms
 The proposed DownsClean framework is evaluated against six state-of-the-art baselines representing a diverse spectrum of cleaning paradigms:
 * **Smooth (Smoothing Algorithm)**: Employs a sliding window mechanism to replace raw data points with rolling localized statistical indicators, filtering high-frequency noise while smoothing out localized spikes.
 * **Speed (Velocity Constraint Cleaning)**: Leverages domain-specific physical velocity bounds to rapidly identify and isolate transient outliers triggered by signal dropout or transmission corruption.
@@ -45,7 +43,7 @@ The proposed DownsClean framework is evaluated against six state-of-the-art base
 * **SHoTClean**: Incorporates a joint soft-and-hard constraint network solved via dynamic programming operators to eliminate structural anomalies while recovering underlying multivariate distributions.
 * **Akane**: Guided by the principle of perplexity minimization, it uses local optimization with pruning to replace dirty data and accurately recover time series patterns under strict resource budgets.
 
-## 5. Downstream Predictive Models
+## 4. Downstream Predictive Models
 To evaluate the downstream utility and adaptability of the cleaned sequence, the optimized outputs are directly integrated into five contemporary forecasting architectures:
 * **LightGBM**: A highly efficient, distributed gradient boosting framework structured on optimal decision tree growth patterns for tabular and tabularized sequential forecasting.
 * **ARIMA**: The classical autoregressive integrated moving average model rooted in mathematical stationarity principles to precisely track historical linear trends and seasonal shifts.
